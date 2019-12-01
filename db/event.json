@@ -1,0 +1,4 @@
+{
+  "action": "run",
+  "queries": ["select pt.name from roles.permission_type as pt inner join roles.permission as p on p.permission_type_id = pt.id inner join roles.permission_role as pr on pr.permission_id = p.id inner join roles.role as r on r.id = pr.role_id inner join users.users as u on u.role_id = r.id where u.id = 'ba047cbc-5618-43d6-a67a-ec4b3632fa9a'", "select r.name from roles.role as r inner join users.users as u on u.role_id = r.id where u.id = 'ba047cbc-5618-43d6-a67a-ec4b3632fa9a'"]
+}

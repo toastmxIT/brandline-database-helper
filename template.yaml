@@ -1,0 +1,41 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: >
+  brandline database-helper lambda.
+# More info about Globals: https://github.com/awslabs/serverless-application-model/blob/master/docs/globals.rst
+Globals:
+  Function:
+    Timeout: 300
+
+Parameters:
+  EnvStageName:
+    Default: dev
+    Description: The Environment name (e.g. dev, prod, etc.)
+    Type: String
+  Region:
+      Default: us-west-2
+      Description: The region to deploy the managed services
+      Type: String
+
+
+Resources:
+  DBUtils:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: db
+      Handler: app.lambda_handler
+      FunctionName:
+        Fn::Sub: ${AWS::StackName}-DBHelper-${EnvStageName}
+      Runtime: python3.7
+      MemorySize: 128
+      Environment:
+        Variables:
+          REGION: !Ref Region
+          LAMBDA_ENV: !Ref EnvStageName
+          RDS_HOST: 'rds-sm.con1rcg8el6v.us-west-2.rds.amazonaws.com'
+          DB_USERNAME: 'masterDB'
+          DB_PASSWORD: 'sm12345678'
+          DB_NAME: 'brandline'
+          DB_PORT: 5432
+      Tags:
+        Function: !Sub "${AWS::StackName}-DBHelper-${EnvStageName}"
