@@ -36,6 +36,6 @@ Resources:
           DB_USERNAME: 'masterDB'
           DB_PASSWORD: 'sm12345678'
           DB_NAME: 'brandline'
-          DB_PORT: 5432
+          DB_PORT: '5432'
       Tags:
         Function: !Sub "${AWS::StackName}-DBHelper-${EnvStageName}"
